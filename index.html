@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#f3f7f8">
+	<meta name="description" content="A school project dashboard about drug abuse prevention and control in Nairobi, supporting SDG 3.">
+	<title>Drug Abuse Prevention | Nairobi Report</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+	<script src="script.js" defer></script>
+</head>
+<body>
+	<div class="app-shell">
+		<aside class="sidebar" aria-label="Main navigation">
+			<a class="brand" href="#overview" aria-label="Project overview">
+				<span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+				<span class="brand-copy"><strong>HEALTH<span>INSIGHT</span></strong><small>NAIROBI PROJECT</small></span>
+			</a>
+			<div class="nav-label">REPORT</div>
+			<nav class="side-nav">
+				<a class="nav-link active" href="#overview"><span class="nav-icon" aria-hidden="true">◫</span> Overview</a>
+				<a class="nav-link" href="#analytics"><span class="nav-icon" aria-hidden="true">▥</span> Data &amp; insights</a>
+				<a class="nav-link" href="#recommendations"><span class="nav-icon" aria-hidden="true">✳</span> Recommendations</a>
+			</nav>
+			<div class="sidebar-bottom">
+				<div class="sdg-mini"><span class="sdg-mini-icon">3</span><div><strong>GOOD HEALTH</strong><small>SDG 3 · WELL-BEING</small></div></div>
+				<p>Student research project<br>Nairobi, Kenya</p>
+			</div>
+		</aside>
+
+		<main class="main-content" id="overview">
+			<header class="topbar">
+				<div class="breadcrumbs"><span>Projects</span><span class="crumb-separator">/</span><strong>Public health</strong></div>
+				<div class="topbar-actions">
+					<span class="report-status"><i></i> Project report</span>
+					<button class="icon-button theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Toggle dark mode"><span class="theme-icon" aria-hidden="true">◐</span></button>
+					<button class="button button-secondary" id="downloadCsv" type="button"><span aria-hidden="true">↓</span><span class="button-label">Download data</span></button>
+					<button class="button button-primary" id="exportPdf" type="button"><span aria-hidden="true">▤</span><span class="button-label">Export PDF</span></button>
+				</div>
+			</header>
+
+			<section class="intro-section">
+				<div class="intro-copy">
+					<div class="eyebrow"><span class="eyebrow-line"></span> COMMUNITY HEALTH · NAIROBI COUNTY</div>
+					<h1>Drug Abuse Prevention<br><span>&amp; Control in Nairobi</span></h1>
+					<p class="intro-subtitle">Supporting SDG 3: Good Health and Well-being</p>
+					<p class="intro-description">An overview of reported substance use patterns and prevention priorities across selected Nairobi communities.</p>
+					<a class="button button-primary intro-action" href="#recommendations">Solutions and controls</a>
+				</div>
+				<div class="intro-art" aria-hidden="true">
+					<div class="art-ring ring-one"></div><div class="art-ring ring-two"></div>
+					<div class="art-center"><span>03</span><small>HEALTH<br>&amp; WELL-BEING</small></div>
+					<span class="art-dot dot-one"></span><span class="art-dot dot-two"></span><span class="art-dot dot-three"></span>
+				</div>
+			</section>
+
+			<section class="filter-bar" aria-label="Dashboard filters">
+				<div class="filter-heading"><span class="filter-symbol" aria-hidden="true">▽</span><div><strong>Explore the data</strong><small>Refine report view</small></div></div>
+				<label class="filter-control"><span>Area</span><select id="areaFilter" aria-label="Filter by area"><option value="all">All areas</option></select></label>
+				<label class="filter-control"><span>Drug type</span><select id="drugFilter" aria-label="Filter by drug type"><option value="all">All drug types</option></select></label>
+				<button class="clear-filters" id="clearFilters" type="button">Reset filters</button>
+				<span class="filter-note" id="filterNote">Showing all sample responses</span>
+			</section>
+
+			<section class="kpi-grid" aria-label="Key indicators">
+				<article class="kpi-card kpi-blue">
+					<div class="kpi-top"><span>Total people surveyed</span><span class="kpi-icon" aria-hidden="true">♙</span></div>
+					<div class="kpi-value" id="peopleKpi" data-value="0">0</div>
+					<div class="kpi-foot"><span class="kpi-marker"></span><span>Across selected communities</span></div>
+				</article>
+				<article class="kpi-card kpi-green">
+					<div class="kpi-top"><span>Most common drug</span><span class="kpi-icon" aria-hidden="true">◉</span></div>
+					<div class="kpi-value kpi-word" id="commonKpi">—</div>
+					<div class="kpi-foot"><span class="kpi-marker"></span><span id="commonFoot">Most reported in sample</span></div>
+				</article>
+				<article class="kpi-card kpi-cyan">
+					<div class="kpi-top"><span>Areas covered</span><span class="kpi-icon" aria-hidden="true">⌖</span></div>
+					<div class="kpi-value" id="areasKpi" data-value="0">0</div>
+					<div class="kpi-foot"><span class="kpi-marker"></span><span>Selected Nairobi communities</span></div>
+				</article>
+				<article class="kpi-card kpi-lime">
+					<div class="kpi-top"><span>Awareness rate</span><span class="kpi-icon" aria-hidden="true">✳</span></div>
+					<div class="kpi-value" id="awarenessKpi" data-value="0">0%</div>
+					<div class="kpi-foot"><span class="kpi-marker"></span><span>Know where to seek support</span></div>
+				</article>
+			</section>
+
+			<section class="chart-grid" id="analytics" aria-label="Data visualizations">
+				<article class="panel chart-panel bar-panel">
+					<div class="panel-heading"><div><span class="panel-kicker">SUBSTANCE PROFILE</span><h2>People by drug type</h2></div><span class="chart-menu" aria-hidden="true">•••</span></div>
+					<p class="panel-description">Reported responses in the selected view</p>
+					<div class="chart-wrap bar-chart-wrap"><canvas id="drugChart" role="img" aria-label="Bar chart showing people by drug type"></canvas></div>
+					<div class="chart-legend" id="drugLegend" aria-label="Drug type chart legend"></div>
+				</article>
+				<article class="panel chart-panel area-panel">
+					<div class="panel-heading"><div><span class="panel-kicker">GEOGRAPHIC BREAKDOWN</span><h2>Distribution by area</h2></div><span class="chart-menu" aria-hidden="true">•••</span></div>
+					<p class="panel-description">Share of sample responses by community</p>
+					<div class="chart-wrap pie-chart-wrap"><canvas id="areaChart" role="img" aria-label="Doughnut chart showing response distribution by area"></canvas><div class="donut-center"><strong id="donutTotal">0</strong><span>RESPONSES</span></div></div>
+					<div class="area-legend" id="areaLegend" aria-label="Area chart legend"></div>
+				</article>
+			</section>
+
+			<section class="lower-grid">
+				<article class="panel summary-panel">
+					<div class="panel-heading"><div><span class="panel-kicker">AT A GLANCE</span><h2>Statistics summary</h2></div><span class="summary-badge">LIVE VIEW</span></div>
+					<p class="summary-intro">A concise readout of the current filtered sample.</p>
+					<div class="summary-stat-list">
+						<div class="summary-stat"><span class="summary-bullet bullet-blue"></span><span>Responses in view</span><strong id="summaryResponses">0</strong></div>
+						<div class="summary-stat"><span class="summary-bullet bullet-green"></span><span>Leading substance</span><strong id="summaryLeading">—</strong></div>
+						<div class="summary-stat"><span class="summary-bullet bullet-cyan"></span><span>Highest reporting area</span><strong id="summaryArea">—</strong></div>
+					</div>
+					<div class="summary-insight"><span class="insight-icon" aria-hidden="true">✦</span><p id="summaryInsight">Select a filter to explore the sample data.</p></div>
+					<p class="data-caveat">Illustrative data for demonstration; not a verified population survey.</p>
+				</article>
+				<article class="panel recommendations-panel" id="recommendations">
+					<div class="panel-heading"><div><span class="panel-kicker">FROM INSIGHT TO ACTION</span><h2>Solutions and controls of drug abuse</h2></div><span class="recommendation-mark" aria-hidden="true">↗</span></div>
+					<div class="recommendation-list">
+						<div class="recommendation-item"><span class="recommendation-number">01</span><div><strong>Make support easy to find</strong><p>Share confidential referral routes through schools, clinics, and community groups.</p></div></div>
+						<div class="recommendation-item"><span class="recommendation-number">02</span><div><strong>Lead with practical education</strong><p>Use age-appropriate, evidence-informed sessions that build refusal and help-seeking skills.</p></div></div>
+						<div class="recommendation-item"><span class="recommendation-number">03</span><div><strong>Partner with local voices</strong><p>Involve youth leaders, families, health workers, and people with lived experience.</p></div></div>
+					</div>
+				</article>
+			</section>
+
+			<footer class="page-footer">
+				<div class="footer-sdg"><span class="footer-sdg-number">3</span><div><strong>GOOD HEALTH AND WELL-BEING</strong><span>United Nations Sustainable Development Goal</span></div></div>
+				<p>Promote health, prevent harm, and improve access to care for all.</p>
+				<span class="footer-credit">NAIROBI · SCHOOL PROJECT</span>
+			</footer>
+		</main>
+	</div>
+</body>
+</html>
